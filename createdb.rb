@@ -16,7 +16,7 @@ end
 end
 # create a dataset from the items table
    data = DB[:data]
-
+# time is in military time 
   data.insert(:date => 4_15_17, :time => 741, :level => 281)
   data.insert(:date => 4_15_17, :time => 957, :level => 146)
   data.insert(:date => 4_15_17, :time => 1156, :level => 208)
