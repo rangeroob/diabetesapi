@@ -1,0 +1,3 @@
+require "./diabetesapi"
+
+run Cuba
