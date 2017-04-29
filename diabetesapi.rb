@@ -25,10 +25,10 @@ Cuba.define do
     res.write data.avg(:level).to_json
   end
 
-  on "add/level/*" do
-    # need to look at doesnt take differenet inputs 
-    data.insert(:level => "*")
-    res.write data.where(:level => "*").to_json
+  on "level", param("a") do |add|
+    res.headers["Conent-Type"] = "application/json; charset=utf-8"
+    data.insert(:level => "#{add}") 
+    res.write "#{add}".to_json
     end
 end
 end
