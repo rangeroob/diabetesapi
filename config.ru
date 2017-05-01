@@ -1,3 +1,3 @@
-require "./diabetesapi"
+require './diabetesapi'
 
 run Cuba
