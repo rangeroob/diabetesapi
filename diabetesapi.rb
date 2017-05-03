@@ -24,10 +24,9 @@ Cuba.define do
       res.write data.avg(:level).to_json
     end
 
-    # example address localhost:9292/add?d=043017&t=1507&l=120
-    # where ?d= equals the date MMDDYY next to variables must have a & instead
-    # of a ? sign so the time in military time is 15:07 or 3:07pm
-    # then we have the blood sugar level at 120
+    # example address localhost:9292/add?d=2017-04-15&t=1507&l=120
+    # where ?d= equals the date YYYY-MM-DD &t= Time in Military Format
+    # then &l= the Blood Sugar Level
 
     on 'add', param('d'), param('t'), param('l') do |d, t, l|
       res.headers['Conent-Type'] = 'application/json; charset=utf-8'
