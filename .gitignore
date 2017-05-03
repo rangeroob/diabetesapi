@@ -10,7 +10,8 @@
 /test/version_tmp/
 /tmp/
 /db/
-
+/.gs/
+/Gemfile.lock
 # Used by dotenv library to load environment variables.
 # .env
 
