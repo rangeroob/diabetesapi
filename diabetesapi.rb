@@ -15,7 +15,8 @@ data = DB[:data]
 Cuba.define do
   on get do
     on root do
-      res.redirect '/all'
+      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.write data.all.to_json
     end
 
     on 'all' do
