@@ -14,14 +14,15 @@ data = DB[:data]
 
 Cuba.define do
   on get do
+    on root do
+      res.redirect '/all'
+    end
+
     on 'all' do
       res.headers['Conent-Type'] = 'application/json; charset=utf-8'
       res.write data.all.to_json
     end
-    on root do
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
-      res.redirect 'all'
-    end
+
     on 'avg' do
       res.headers['Conent-Type'] = 'application/json; charset=utf-8'
       res.write data.avg(:level).to_json
