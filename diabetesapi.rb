@@ -19,6 +19,7 @@ Cuba.define do
       res.write data.all.to_json
     end
     on root do
+      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
       res.redirect 'all'
     end
     on 'avg' do
