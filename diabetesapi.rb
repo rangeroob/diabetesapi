@@ -23,7 +23,7 @@ Cuba.settings[:render][:views] = './views'
 Cuba.define do
   on get do
     on root do
-      res.write view("layout")
+      res.write view('layout')
     end
 
     on 'all' do
