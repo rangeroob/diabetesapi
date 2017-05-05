@@ -1,4 +1,5 @@
 require 'cuba'
+require 'cuba/render'
 require 'rack/protection'
 require 'json'
 require 'date'
@@ -12,10 +13,17 @@ DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
 
 data = DB[:data]
 
+Cuba.use Rack::Static, root: 'public', urls: ['/css']
+
+Cuba.plugin(Cuba::Render)
+
+Cuba.settings[:render][:template_engine] = 'erb'
+Cuba.settings[:render][:views] = './views'
+
 Cuba.define do
   on get do
     on root do
-      res.redirect 'all'
+      res.write view("layout")
     end
 
     on 'all' do
