@@ -13,26 +13,19 @@ DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
 
 data = DB[:data]
 
-Cuba.use Rack::Static, root: 'public', urls: ['/css']
-
-Cuba.plugin(Cuba::Render)
-
-Cuba.settings[:render][:template_engine] = 'erb'
-Cuba.settings[:render][:views] = './views'
-
 Cuba.define do
   on get do
     on root do
-      res.write view('layout')
+      res.redirect '/all'
     end
 
     on 'all' do
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       res.write data.all.to_json
     end
 
     on 'avg' do
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       res.write data.avg(:level).to_json
     end
 
@@ -41,13 +34,13 @@ Cuba.define do
     # then &l= the Blood Sugar Level
 
     on 'add', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       data.insert(date: d.to_s, time: t.to_s, level: l.to_s)
       res.write data.all.to_json
     end
 
     on 'rm', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       data.where(date: d.to_s, time: t.to_s, level: l.to_s).delete
       res.write data.all.to_json
     end
