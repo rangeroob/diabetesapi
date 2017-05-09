@@ -23,16 +23,17 @@ Cuba.settings[:render][:views] = './views'
 Cuba.define do
   on get do
     on root do
+      res.headers['Content-Type'] = 'text/html; charset=utf-8'
       res.write view('layout')
     end
 
     on 'all' do
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       res.write data.all.to_json
     end
 
     on 'avg' do
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       res.write data.avg(:level).to_json
     end
 
@@ -41,13 +42,13 @@ Cuba.define do
     # then &l= the Blood Sugar Level
 
     on 'add', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       data.insert(date: d.to_s, time: t.to_s, level: l.to_s)
       res.write data.all.to_json
     end
 
     on 'rm', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Conent-Type'] = 'application/json; charset=utf-8'
+      res.headers['Content-Type'] = 'application/json; charset=utf-8'
       data.where(date: d.to_s, time: t.to_s, level: l.to_s).delete
       res.write data.all.to_json
     end
