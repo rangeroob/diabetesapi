@@ -1,22 +1,6 @@
-## Diabetes API
+## Diabetes API Demo
 
-DiabetesAPI is a simple api to monitor blood sugar levels for diabetics(like me) and that can be self hosted as well.
-
-## Motivation
-
-I wanted to learn to make an api that would be useful to me. So I decided to create an api around my diabetes that i could use everyday and I decided on the Ruby programming language because I was more comfortable with it over other languages.
-
-## Installation
-
-    1. git clone https://github.com/rangeroob/diabetesapi
-
-    2. cd diabetesapi
-
-    3. bundle install
-
-    4. rackup
-
-    5. Go to localhost:XXXX
+[Demo](http://diabetesapi.dmviera.pw)
 
 
 ## Contributing
