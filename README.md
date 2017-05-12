@@ -8,32 +8,33 @@ I wanted to learn to make an api that would be useful to me. So I decided to cre
 
 ## Installation
 
-    1. git clone https://github.com/rangeroob/diabetesapi
+1. git clone https://github.com/rangeroob/diabetesapi
 
-    2. cd diabetesapi
+2. cd diabetesapi
 
-    3. bundle install
+3. bundle install
 
-    4. rackup
+4. ruby createdb.rb
 
-    5. Go to localhost:XXXX
+5. rackup
 
+6. Go to localhost:XXXX
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rangeroob/diabetesapi.
 
-
-    1. Fork it
-    2. Create your feature branch (git checkout -b my-new-feature)
-    3. Commit your changes (git commit -am 'Add some feature')
-    4. Push to the branch (git push origin my-new-feature)
-    5. Create new Pull Request
-
+1. Fork it
+2. Create your feature branch (git checkout -b my-new-feature dev)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request to dev branch
 
 
 ## License
 
 The project is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+
 
 
