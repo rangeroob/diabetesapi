@@ -57,27 +57,28 @@ end
 
 Cuba.define do
   on get do
+    @version = 'v0'
     on root do
-      res.redirect('all')
+      res.redirect("#{@version}/all")
     end
 
-    on 'all' do
+    on "#{@version}/all" do
       run AllData
     end
 
-    on 'avg' do
+    on "#{@version}/avg" do
       run AvgLevel
     end
 
-    on 'add' do
+    on "#{@version}/add" do
       run AddData
     end
 
-    on 'rm' do
+    on "#{@version}/rm" do
       run RemoveData
     end
 
-    on 'edit' do
+    on "#{@version}/edit" do
       run EditData
     end
   end
