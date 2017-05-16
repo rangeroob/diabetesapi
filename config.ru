@@ -1,3 +1,3 @@
-require './diabetesapi'
+require './api.rb'
 
 run Cuba
