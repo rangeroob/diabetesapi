@@ -10,45 +10,76 @@ Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
-
 data = DB[:data]
+
+class AllData < Cuba; end
+
+AllData.define do
+  on root do
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    res.write data.all.to_json
+  end
+end
+
+class AvgLevel < Cuba; end
+AvgLevel.define do
+  on root do
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    res.write data.avg(:level).to_json
+  end
+end
+
+class AddData < Cuba; end
+AddData.define do
+  on root, param('d'), param('t'), param('l') do |d, t, l|
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    data.insert(date: d.to_s, time: t.to_s, level: l.to_s)
+    res.write data.all.to_json
+  end
+end
+
+class RemoveData < Cuba; end
+RemoveData.define do
+  on root, param('d'), param('t'), param('l') do |d, t, l|
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    data.where(date: d.to_s, time: t.to_s, level: l.to_s).delete
+    res.write data.all.to_json
+  end
+end
+
+class EditData < Cuba; end
+EditData.define do
+  on root, param('id'), param('d'), param('t'), param('l') do |id, d, t, l|
+    res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    data.where(id: id.to_s).update(date: d.to_s, time: t.to_s, level: l.to_s)
+    res.write data.all.to_json
+  end
+end
 
 Cuba.define do
   on get do
     on root do
-      res.redirect '/all'
+      res.redirect('all')
     end
 
     on 'all' do
-      res.headers['Content-Type'] = 'application/json; charset=utf-8'
-      res.write data.all.to_json
+      run AllData
     end
 
     on 'avg' do
-      res.headers['Content-Type'] = 'application/json; charset=utf-8'
-      res.write data.avg(:level).to_json
+      run AvgLevel
     end
 
-    # example address localhost:9292/add?d=2017-04-15&t=1507&l=120
-    # where ?d= equals the date YYYY-MM-DD &t= Time in Military Format
-    # then &l= the Blood Sugar Level
-
-    on 'add', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Content-Type'] = 'application/json; charset=utf-8'
-      data.insert(date: d.to_s, time: t.to_s, level: l.to_s)
-      res.write data.all.to_json
+    on 'add' do
+      run AddData
     end
 
-    on 'rm', param('d'), param('t'), param('l') do |d, t, l|
-      res.headers['Content-Type'] = 'application/json; charset=utf-8'
-      data.where(date: d.to_s, time: t.to_s, level: l.to_s).delete
-      res.write data.all.to_json
+    on 'rm' do
+      run RemoveData
     end
 
-    on 'edit', param('id'), param('d'), param('t'), param('l') do |id, d, t, l|
-      res.headers['Content-Type'] = 'application/json; charset=utf-8'
-      data.where(id: id.to_s).update(date: d.to_s, time: t.to_s, level: l.to_s)
-      res.write data.all.to_json
+    on 'edit' do
+      run EditData
     end
   end
 end
