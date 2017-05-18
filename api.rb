@@ -1,5 +1,4 @@
 require 'cuba'
-require 'cuba/render'
 require 'rack/protection'
 require 'json'
 require 'date'
