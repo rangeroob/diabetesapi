@@ -1,4 +1,5 @@
 require 'cuba'
+require 'cuba/safe'
 require 'rack/protection'
 require 'json'
 require 'date'
@@ -8,6 +9,7 @@ require 'sequel'
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
+Cuba.plugin Cuba::Safe
 DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
 data = DB[:data]
 
