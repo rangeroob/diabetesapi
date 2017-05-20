@@ -1,0 +1,13 @@
+require 'rake/testtask'
+
+task :test do
+  ruby 'test/*'
+end
+
+task :createdb do
+  ruby 'setup/createdb.rb'
+end
+
+task :removedb do
+  ruby 'setup/removedb.rb'
+end
