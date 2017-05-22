@@ -14,12 +14,17 @@ I wanted to learn to make an api that would be useful to me. So I decided to cre
 
     3. bundle install
 
-    4. ruby createdb.rb
+    4. rake createdb
 
     5. rackup
 
     6. Go to localhost:XXXX
 
+## Testing
+
+    1. cd diabetesapi
+    2. rake test
+    
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at <https://github.com/rangeroob/diabetesapi>.

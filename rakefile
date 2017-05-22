@@ -1,0 +1,14 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.pattern = 'test/test_*.rb'
+end
+
+task :createdb do
+  ruby 'setup/createdb.rb'
+end
+
+task :removedb do
+  ruby 'setup/removedb.rb'
+end

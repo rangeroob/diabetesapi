@@ -11,7 +11,7 @@
 /tmp/
 /db/
 /.gs/
-/Gemfile.lock
+#/Gemfile.lock
 # Used by dotenv library to load environment variables.
 # .env
 
