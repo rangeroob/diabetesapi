@@ -1,7 +1,8 @@
 require 'rake/testtask'
 
-task :test do
-  ruby 'test/*'
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.pattern = 'test/test_*.rb'
 end
 
 task :createdb do
