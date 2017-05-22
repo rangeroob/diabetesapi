@@ -1,0 +1,26 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    clap (1.0.0)
+    cuba (3.8.0)
+      rack (>= 1.6.0)
+    cutest (1.2.3)
+      clap
+    rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
+    sequel (4.46.0)
+    sqlite3 (1.3.13)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cuba (>= 3.8.0)
+  cutest (>= 1.2.3)
+  rack-protection (>= 1.5.3)
+  sequel (>= 4.46.0)
+  sqlite3 (>= 1.3.13)
+
+BUNDLED WITH
+   1.14.6
