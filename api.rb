@@ -5,6 +5,7 @@ require 'json'
 require 'date'
 require 'time'
 require 'sequel'
+require 'pony'
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
@@ -56,6 +57,27 @@ EditData.define do
   end
 end
 
+class EmailData < Cuba; end
+EmailData.define do
+  on root, param('address') do |address|
+    res.headers['Content-Type'] = 'text/html; charset=utf-8'
+    res.write "email sent to #{address}"
+    Pony.mail(to: address.to_s,
+              from: 'diabetesapi.dmviera.pw',
+              subject: 'Diabetes Data',
+              body: data.all.to_json,
+              via: :smtp,
+              via_options: {
+                address: 'smtp.gmail.com',
+                port: '587',
+                user_name: address.to_s,
+                password: 'mvcikurziojsntky',
+                authentication: :plain,
+                domain: 'localhost.localdomain'
+              })
+  end
+end
+
 Cuba.define do
   @version = 'v1'
   on get do
@@ -81,6 +103,9 @@ Cuba.define do
 
     on "#{@version}/edit" do
       run EditData
+    end
+    on "#{@version}/email" do
+      run EmailData
     end
   end
 end
