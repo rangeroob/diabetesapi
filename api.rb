@@ -57,7 +57,7 @@ EditData.define do
 end
 
 Cuba.define do
-  @version = 'v0'
+  @version = 'v1'
   on get do
     on root do
       res.redirect("#{@version}/all")
