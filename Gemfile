@@ -8,4 +8,5 @@ gem 'sqlite3', '>=1.3.13'
 
 group :test do
   gem 'cutest', '>=1.2.3'
+  gem 'rack-test', '>=0.6.3'
 end
