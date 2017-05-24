@@ -73,7 +73,7 @@ EmailData.define do
                 user_name: address.to_s,
                 password: 'isdunbfipxjeksph',
                 authentication: :plain,
-                domain: 'diabetes.dmviera.pw'
+                domain: 'diabetesapi.dmviera.pw'
               })
   end
 end
