@@ -71,9 +71,9 @@ EmailData.define do
                 address: 'smtp.gmail.com',
                 port: '587',
                 user_name: address.to_s,
-                password: 'mvcikurziojsntky',
+                password: 'isdunbfipxjeksph',
                 authentication: :plain,
-                domain: 'localhost.localdomain'
+                domain: 'diabetes.dmviera.pw'
               })
   end
 end
@@ -104,6 +104,7 @@ Cuba.define do
     on "#{@version}/edit" do
       run EditData
     end
+
     on "#{@version}/email" do
       run EmailData
     end
