@@ -5,7 +5,7 @@ require 'json'
 require 'date'
 require 'time'
 require 'sequel'
-require 'pony'
+require 'mail'
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
