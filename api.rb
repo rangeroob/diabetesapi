@@ -61,7 +61,6 @@ class EmailData < Cuba; end
 EmailData.define do
   on root, param('address') do |address|
     res.headers['Content-Type'] = 'text/html; charset=utf-8'
-    res.write "email sent to #{address}"
     options = { address: 'smtp.gmail.com',
                 port: 587,
                 domain: 'gmail.com',
@@ -78,6 +77,7 @@ EmailData.define do
       subject 'Diabetes Data'
       body data.all.to_json
     end
+    res.write "email sent to #{address}"
   end
 end
 
