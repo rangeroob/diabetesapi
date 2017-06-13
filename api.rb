@@ -6,80 +6,24 @@ require 'date'
 require 'time'
 require 'sequel'
 require 'mail'
+require File.join(File.dirname(__FILE__), 'lib/Add_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/All_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/Avg_level.rb')
+require File.join(File.dirname(__FILE__), 'lib/Edit_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/Email_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/Remove_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/database_connection.rb')
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.plugin Cuba::Safe
-DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
-data = DB[:data]
-
-class AllData < Cuba; end
-AllData.define do
-  on root do
-    res.headers['Content-Type'] = 'application/json; charset=utf-8'
-    res.write data.all.to_json
-  end
-end
-
-class AvgLevel < Cuba; end
-AvgLevel.define do
-  on root do
-    res.headers['Content-Type'] = 'application/json; charset=utf-8'
-    res.write data.avg(:level).to_json
-  end
-end
-
-class AddData < Cuba; end
-AddData.define do
-  on root, param('d'), param('t'), param('l') do |d, t, l|
-    res.headers['Content-Type'] = 'application/json; charset=utf-8'
-    data.insert(date: d.to_s, time: t.to_s, level: l.to_s)
-    res.write data.all.to_json
-  end
-end
-
-class RemoveData < Cuba; end
-RemoveData.define do
-  on root, param('d'), param('t'), param('l') do |d, t, l|
-    res.headers['Content-Type'] = 'application/json; charset=utf-8'
-    data.where(date: d.to_s, time: t.to_s, level: l.to_s).delete
-    res.write data.all.to_json
-  end
-end
-
-class EditData < Cuba; end
-EditData.define do
-  on root, param('id'), param('d'), param('t'), param('l') do |id, d, t, l|
-    res.headers['Content-Type'] = 'application/json; charset=utf-8'
-    data.where(id: id.to_s).update(date: d.to_s, time: t.to_s, level: l.to_s)
-    res.write data.all.to_json
-  end
-end
-
-class EmailData < Cuba; end
-EmailData.define do
-  on root, param('address') do |address|
-    res.headers['Content-Type'] = 'text/html; charset=utf-8'
-    options = { address: 'smtp.gmail.com',
-                port: 587,
-                domain: 'gmail.com',
-                user_name: 'test.diabetesapi@gmail.com',
-                password: 'isdunbfipxjeksph',
-                authentication: 'plain',
-                enable_starttls_auto: true }
-    Mail.defaults do
-      delivery_method :smtp, options
-    end
-    Mail.deliver do
-      to address.to_s
-      from 'test.diabetesapi@gmail.com'
-      subject 'Diabetes Data'
-      body data.all.to_json
-    end
-    res.write "email sent to #{address}"
-  end
-end
+extend AllData
+extend AvgLevel
+extend AddData
+extend RemoveData
+extend EditData
+extend EmailData
 
 Cuba.define do
   @version = 'v1'
@@ -89,27 +33,27 @@ Cuba.define do
     end
 
     on "#{@version}/all" do
-      run AllData
+      run AllData::AllData
     end
 
     on "#{@version}/avg" do
-      run AvgLevel
+      run AvgLevel::AvgLevel
     end
 
     on "#{@version}/add" do
-      run AddData
+      run AddData::AddData
     end
 
     on "#{@version}/rm" do
-      run RemoveData
+      run RemoveData::RemoveData
     end
 
     on "#{@version}/edit" do
-      run EditData
+      run EditData::EditData
     end
 
     on "#{@version}/email" do
-      run EmailData
+      run EmailData::EmailData
     end
   end
 end
