@@ -12,12 +12,13 @@ require File.join(File.dirname(__FILE__), 'lib/Avg_level.rb')
 require File.join(File.dirname(__FILE__), 'lib/Edit_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Email_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Remove_data.rb')
-require File.join(File.dirname(__FILE__), 'lib/database_connection.rb')
+
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.plugin Cuba::Safe
+
 extend AllData
 extend AvgLevel
 extend AddData
