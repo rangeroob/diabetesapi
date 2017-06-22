@@ -27,7 +27,10 @@ scope do
     get 'v1/email?address=receive.diabetesapi@gmail.com&database=diabetes'
     assert_equal 'email sent to receive.diabetesapi@gmail.com', last_response.body
 
-    get 'v1/database?create=test'
+    get 'v1/createdb?name=test'
     assert_equal 'Database test created', last_response.body
+
+    get 'v1/removedb?name=test'
+    assert_equal 'Database test removed', last_response.body
   end
 end
