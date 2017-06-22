@@ -13,6 +13,7 @@ require File.join(File.dirname(__FILE__), 'lib/Create_database.rb')
 require File.join(File.dirname(__FILE__), 'lib/Edit_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Email_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Remove_data.rb')
+require File.join(File.dirname(__FILE__), 'lib/Remove_database.rb')
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
@@ -23,9 +24,10 @@ extend AllData
 extend AvgLevel
 extend AddData
 extend CreateDatabase
-extend RemoveData
 extend EditData
 extend EmailData
+extend RemoveData
+extend RemoveDatabase
 
 Cuba.define do
   @version = 'v1'
@@ -46,7 +48,7 @@ Cuba.define do
       run AddData::AddData
     end
 
-    on "#{@version}/database" do
+    on "#{@version}/createdb" do
       run CreateDatabase::CreateDatabase
     end
 
@@ -60,6 +62,10 @@ Cuba.define do
 
     on "#{@version}/rm" do
       run RemoveData::RemoveData
+    end
+
+    on "#{@version}/removedb" do
+      run RemoveDatabase::RemoveDatabase
     end
   end
 end
