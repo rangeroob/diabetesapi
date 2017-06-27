@@ -33,7 +33,7 @@ Cuba.define do
   @version = 'v1'
   on get do
     on root do
-      res.redirect("#{@version}/all")
+      res.redirect("#{@version}/all?database=diabetes")
     end
 
     on "#{@version}/all" do
@@ -43,7 +43,9 @@ Cuba.define do
     on "#{@version}/avg" do
       run AvgLevel::AvgLevel
     end
+  end
 
+  on post do
     on "#{@version}/add" do
       run AddData::AddData
     end
@@ -59,7 +61,8 @@ Cuba.define do
     on "#{@version}/email" do
       run EmailData::EmailData
     end
-
+  end
+  on delete do
     on "#{@version}/rm" do
       run RemoveData::RemoveData
     end
