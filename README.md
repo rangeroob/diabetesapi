@@ -1,10 +1,10 @@
 ## Diabetes API
 
-DiabetesAPI is a simple api to monitor blood sugar levels for diabetics(like me). With the ability to be self hosted as well.
+Diabetes API is a simple api to monitor blood sugar levels for diabetics(like me).
 
-## Motivation
+## Motivation Behind This Project
 
-I wanted to learn to make an api that would be useful to me. So I decided to create a api around my diabetes that I could use everyday.
+I wanted to learn to make an api that would be useful to me. So I decided to create a api around my diabetes that I could use everyday. And hopefully it is useful to others as well.
 
 ## Local Setup
 
@@ -18,13 +18,12 @@ I wanted to learn to make an api that would be useful to me. So I decided to cre
 
     5. rackup
 
-    6. Go to localhost:XXXX
+    6. Go to localhost:9292
 
 ## Testing
 
-    1. cd diabetesapi
-    2. rake test
-    
+As simple as running `rake test` from within the project folder.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at <https://github.com/rangeroob/diabetesapi>.
