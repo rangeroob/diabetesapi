@@ -4,8 +4,8 @@ Rake::TestTask.new do |t|
   t.libs << 'test'
   t.pattern = 'test/test_*.rb'
   at_exit do
-    if File.exist?('db/test.sqlite3')
-      FileUtils.remove_entry_secure('db/test.sqlite3')
+    if File.exist?('db/')
+      FileUtils.remove_entry_secure('db/')
     end
   end
 end
