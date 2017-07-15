@@ -7,13 +7,13 @@ module CreateDatabase
       if !File.exist?("db/#{name}.sqlite3")
         DB = Sequel.connect("sqlite://db/#{name}.sqlite3")
         begin
-                DB.create_table :data do
-                  primary_key :id
-                  Number :date
-                  Number :time
-                  Number :level
-                end
-              end
+          DB.create_table :data do
+            primary_key :id
+            Number :date
+            Number :time
+            Number :level
+          end
+        end
         res.write "Database #{name} created"
       else
         res.write "Database #{name} already exists"
