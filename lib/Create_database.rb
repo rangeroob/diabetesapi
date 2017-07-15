@@ -1,3 +1,4 @@
+
 module CreateDatabase
   class CreateDatabase < Cuba; end
   CreateDatabase.define do
