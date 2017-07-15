@@ -8,6 +8,7 @@ FileUtils.mkdir 'db' unless Dir.exist?('db')
 DB = Sequel.connect('sqlite://db/diabetes.sqlite3')
 
 # create an items table
+unless File.exist?('db/diabetes.sqlite3')
 begin
   DB.create_table :data do
     primary_key :id
@@ -31,3 +32,4 @@ data.insert(date: Date.new(2017, 0o4, 15), time: 1600, level: 210)
 data.insert(date: Date.new(2017, 0o4, 15), time: 1727, level: 88)
 data.insert(date: Date.new(2017, 0o4, 15), time: 1810, level: 68)
 data.insert(date: Date.new(2017, 0o4, 15), time: 2145, level: 108)
+end
