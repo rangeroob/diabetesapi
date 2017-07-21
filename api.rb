@@ -20,55 +20,48 @@ Cuba.use Rack::Protection
 Cuba.use Rack::Protection::RemoteReferrer
 Cuba.plugin Cuba::Safe
 
-extend AllData
-extend AvgLevel
-extend AddData
-extend CreateDatabase
-extend EditData
-extend EmailData
-extend RemoveData
-extend RemoveDatabase
+extend Api
 
 Cuba.define do
   @version = 'v1'
   on get do
     on root do
-      res.redirect("#{@version}/all?database=diabetes")
+      res.redirect("#{@version}/all")
     end
 
     on "#{@version}/all" do
-      run AllData::AllData
+      run Api::AllData
     end
 
     on "#{@version}/avg" do
-      run AvgLevel::AvgLevel
+      run Api::AvgLevel
     end
   end
 
   on post do
     on "#{@version}/add" do
-      run AddData::AddData
+      run Api::AddData
     end
 
     on "#{@version}/createdb" do
-      run CreateDatabase::CreateDatabase
+      run Api::CreateDatabase
     end
 
     on "#{@version}/edit" do
-      run EditData::EditData
+      run Api::EditData
     end
 
     on "#{@version}/email" do
-      run EmailData::EmailData
+      run Api::EmailData
     end
   end
   on delete do
     on "#{@version}/rm" do
-      run RemoveData::RemoveData
+      run Api::RemoveData
     end
 
     on "#{@version}/removedb" do
-      run RemoveDatabase::RemoveDatabase
+      run Api::RemoveDatabase
     end
   end
 end

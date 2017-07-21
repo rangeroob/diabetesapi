@@ -1,5 +1,5 @@
 
-module AddData
+module Api
   class AddData < Cuba; end
   DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
   data = DB[:data]

@@ -1,5 +1,5 @@
 
-module CreateDatabase
+module Api
   class CreateDatabase < Cuba; end
   CreateDatabase.define do
     on root, param('name') do |name|
