@@ -1,10 +1,10 @@
 
 module EmailData
   class EmailData < Cuba; end
+  DB = Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
+  data = DB[:data]
   EmailData.define do
-    on root, param('address'), param('database') do |address, database|
-      DB = Sequel.connect("sqlite://db/#{database}.sqlite3", max_connections: 200)
-      data = DB[:data]
+    on root, param('address') do |address|
       res.headers['Content-Type'] = 'text/html; charset=utf-8'
       options = { address: 'smtp.gmail.com',
                   port: 587,
