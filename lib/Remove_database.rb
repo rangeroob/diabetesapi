@@ -1,5 +1,5 @@
 
-module RemoveDatabase
+module Api
   class RemoveDatabase < Cuba; end
   RemoveDatabase.define do
     on root, param('name') do |name|
