@@ -2,6 +2,7 @@ require 'cuba'
 require 'cuba/safe'
 require 'rack/protection'
 require 'json'
+require 'jwe'
 require 'date'
 require 'time'
 require 'sequel'
@@ -14,6 +15,9 @@ require File.join(File.dirname(__FILE__), 'lib/Edit_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Email_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Remove_data.rb')
 require File.join(File.dirname(__FILE__), 'lib/Remove_database.rb')
+require File.join(File.dirname(__FILE__), 'lib/Sign_up.rb')
+
+require File.join(File.dirname(__FILE__), 'env/environment.rb')
 
 Cuba.use Rack::Session::Cookie, secret: Random.new_seed.to_s
 Cuba.use Rack::Protection
@@ -54,7 +58,12 @@ Cuba.define do
     on "#{@version}/email" do
       run Api::EmailData
     end
+
+    on "#{@version}/signup" do
+      run Api::Signup
+    end
   end
+  
   on delete do
     on "#{@version}/rm" do
       run Api::RemoveData
