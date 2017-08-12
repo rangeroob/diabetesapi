@@ -63,7 +63,7 @@ Cuba.define do
       run Api::Signup
     end
   end
-  
+
   on delete do
     on "#{@version}/rm" do
       run Api::RemoveData
