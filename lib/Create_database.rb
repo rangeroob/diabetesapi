@@ -6,9 +6,9 @@ module Api
       res.headers['Content-Type'] = 'text/html; charset=utf-8'
       FileUtils.mkdir 'db' unless Dir.exist?('db')
       if !File.exist?("db/#{name}.sqlite3")
-        DB = Sequel.connect("sqlite://db/#{name}.sqlite3")
+        db = Sequel.connect("sqlite://db/#{name}.sqlite3")
         begin
-          DB.create_table :data do
+          db.create_table :data do
             primary_key :id
             Number :date
             Number :time
