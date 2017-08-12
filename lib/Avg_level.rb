@@ -3,7 +3,6 @@ module Api
   class AvgLevel < Cuba; end
   Sequel.connect('sqlite://db/diabetes.sqlite3', max_connections: 200)
   data = DB.from(:data)
-  users = DB.from(:users)
   AvgLevel.define do
     on root, param('key') do |key|
       begin
