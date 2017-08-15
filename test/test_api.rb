@@ -79,4 +79,5 @@ scope do
     delete 'v1/removedb?name=test'
     assert_equal 'Database test removed', last_response.body
   end
+  FileUtils.remove_entry_secure('db/')
 end
