@@ -15,8 +15,8 @@ module Api
       options = { address: 'smtp.gmail.com',
                   port: 587,
                   domain: 'gmail.com',
-                  user_name: 'test.diabetesapi@gmail.com',
-                  password: 'isdunbfipxjeksph',
+                  user_name: ENV['email'],
+                  password: ENV['emailpassword'],
                   authentication: 'plain',
                   enable_starttls_auto: true }
       Mail.defaults do
@@ -24,7 +24,7 @@ module Api
       end
       Mail.deliver do
         to email.to_s
-        from 'test.diabetesapi@gmail.com'
+        from ENV['email']
         subject 'Diabetes API Key'
         body users.first(userid: userid.to_s).to_json
       end
