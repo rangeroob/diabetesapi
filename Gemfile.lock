@@ -6,7 +6,7 @@ GEM
       rack (>= 1.6.0)
     cutest (1.2.3)
       clap
-    rack (2.2.2)
+    rack (2.2.3)
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
